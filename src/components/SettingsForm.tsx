@@ -2,9 +2,11 @@ import { useForm } from 'react-hook-form'
 
 interface FormValues {
   textLength: number
+  minWordLength: number
+  maxWordLength: number
 }
 
-const SettingsForm = () => {
+const SettingsFrom = () => {
   const {
     register,
     handleSubmit,
@@ -21,12 +23,31 @@ const SettingsForm = () => {
     >
       <div className='flex items-center gap-8'>
         <label htmlFor='textLength' className='text-amber-400 text-lg'>
-          Text length:
+          Text length (words):
         </label>
         <input
           type='text'
           {...register('textLength', { min: 1, max: 100 })}
-          className='w-16 rounded p-1 focus:outline-none'
+          className='rounded p-1 focus:outline-none'
+        />
+      </div>
+      <div className='flex items-center gap-8'>
+        <label className='text-amber-400 text-lg'>Word length</label>
+        <label htmlFor='minWordLength' className='text-amber-400 text-lg'>
+          Min:
+        </label>
+        <input
+          type='text'
+          {...register('minWordLength', { min: 2, max: 100 })}
+          className='rounded p-1 focus:outline-none'
+        />
+        <label htmlFor='maxWordLength' className='text-amber-400 text-lg'>
+          Max:
+        </label>
+        <input
+          type='text'
+          {...register('maxWordLength', { min: 2, max: 100 })}
+          className='rounded p-1 focus:outline-none'
         />
       </div>
 
@@ -39,4 +60,4 @@ const SettingsForm = () => {
   )
 }
 
-export default SettingsForm
+export default SettingsFrom
