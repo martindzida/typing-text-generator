@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form'
+import genText from '../utils/genText'
+import { Dispatch, SetStateAction } from 'react'
 
 interface FormValues {
   textLength: number
@@ -6,15 +8,31 @@ interface FormValues {
   maxWordLength: number
 }
 
-const SettingsFrom = () => {
+interface Props {
+  getGeneratedText: Dispatch<SetStateAction<string | null>>
+}
+
+const SettingsFrom = ({ getGeneratedText }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>()
+  } = useForm<FormValues>({
+    defaultValues: {
+      textLength: 50,
+      minWordLength: 2,
+      maxWordLength: 8,
+    },
+  })
 
   const submitHanlder = (data: FormValues) => {
-    console.log(data)
+    const text = genText(
+      ['a'],
+      data.textLength,
+      data.minWordLength,
+      data.minWordLength
+    )
+    getGeneratedText(text)
   }
   return (
     <form
