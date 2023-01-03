@@ -4,7 +4,6 @@ const genText = (
   minWordLen: number,
   maxWordLen: number
 ): string => {
-  //FIXME: just for fun
   return [...Array(textLen)]
     .map(word =>
       [...Array(minWordLen + Math.floor(Math.random() * maxWordLen))]
