@@ -42,11 +42,11 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(submitHanlder)}
-      className='flex flex-col gap-8 bg-slate-600 p-16 rounded-lg border-2 border-amber-400'
+      className='flex flex-col gap-8'
     >
       <div className='flex justify-center items-center gap-4 pb-8'>
         <h2 className='text-amber-400 text-4xl'>Options</h2>
-        <Cog6ToothIcon className='w-8 h-8 text-amber-400' />
+        <Cog6ToothIcon className='w-8 h-8 text-slate-400' />
       </div>
       <div className='flex items-center gap-8'>
         <label htmlFor='textLength' className='text-amber-400 text-lg'>
@@ -80,7 +80,7 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
 
       <button
         type='submit'
-        className='flex justify-center gap-4 items-center bg-amber-400 text-slate-900 font-medium text-lg rounded p-3 mt-8'
+        className='flex justify-center gap-4 items-center bg-amber-400 text-slate-900 font-medium text-lg rounded p-3 mt-4'
       >
         Generate <DocumentTextIcon className='w-6 h-6' />
       </button>
