@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import genText from '../utils/genText'
 import { Dispatch, SetStateAction } from 'react'
+import { Cog6ToothIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
 
 interface FormValues {
   textLength: number
@@ -25,12 +26,16 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
     },
   })
 
-  const submitHanlder = (data: FormValues) => {
+  const submitHanlder = ({
+    textLength,
+    minWordLength,
+    maxWordLength,
+  }: FormValues) => {
     const text = genText(
-      ['a'],
-      data.textLength,
-      data.minWordLength,
-      data.minWordLength
+      ['a', 'b', 'c'],
+      textLength,
+      minWordLength,
+      maxWordLength
     )
     getGeneratedText(text)
   }
@@ -39,6 +44,10 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
       onSubmit={handleSubmit(submitHanlder)}
       className='flex flex-col gap-8 bg-slate-600 p-16 rounded-lg border-2 border-amber-400'
     >
+      <div className='flex justify-center items-center gap-4 pb-8'>
+        <h2 className='text-amber-400 text-4xl'>Options</h2>
+        <Cog6ToothIcon className='w-8 h-8 text-amber-400' />
+      </div>
       <div className='flex items-center gap-8'>
         <label htmlFor='textLength' className='text-amber-400 text-lg'>
           Text length (words):
@@ -69,11 +78,12 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
         />
       </div>
 
-      <input
+      <button
         type='submit'
-        value='Generate'
-        className='bg-amber-400 text-slate-900 font-medium text-lg rounded p-2'
-      />
+        className='flex justify-center gap-4 items-center bg-amber-400 text-slate-900 font-medium text-lg rounded p-3 mt-8'
+      >
+        Generate <DocumentTextIcon className='w-6 h-6' />
+      </button>
     </form>
   )
 }
