@@ -2,17 +2,14 @@ import { useState } from 'react'
 import SettingsForm from './components/SettingsForm'
 import DisplayText from './components/DisplayText'
 import AddCharsForm from './components/AddCharsForm'
+import Header from './components/Header'
 
 function App() {
   const [curText, setCurText] = useState<string | null>(null)
 
   return (
     <div className='w-full min-h-screen flex flex-col justify-center items-center bg-slate-700 font-mono'>
-      <header>
-        <h1 className='text-amber-400 text-6xl p-16 text-center'>
-          Typing Text Generator
-        </h1>
-      </header>
+      <Header />
       {curText ? (
         <DisplayText text={curText} genNewText={setCurText} />
       ) : (
