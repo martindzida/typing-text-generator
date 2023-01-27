@@ -33,9 +33,9 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
   }: FormValues) => {
     const text = genText(
       ['a', 'b', 'c'],
-      textLength,
-      minWordLength,
-      maxWordLength
+      Number(textLength),
+      Number(minWordLength),
+      Number(maxWordLength)
     )
     getGeneratedText(text)
   }
@@ -45,7 +45,7 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
       className='flex flex-col gap-8'
     >
       <div className='flex justify-center items-center gap-4 pb-8'>
-        <h2 className='text-amber-400 text-4xl'>Options</h2>
+        <h3 className='text-amber-400 text-4xl'>Options</h3>
         <Cog6ToothIcon className='w-8 h-8 text-slate-400' />
       </div>
       <div className='flex items-center gap-8'>
