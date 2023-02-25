@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { LanguageIcon } from '@heroicons/react/24/outline'
 import SwitchModeSpan from './SwitchModeSpan'
 import FormHeader from './FormHeader'
+import CurrentChars from './CurrentChars'
 
 interface FormValues {
   newChar: string
@@ -61,10 +62,7 @@ const AddCharsForm = () => {
           </SwitchModeSpan>
         </div>
       </div>
-      <div className='flex items-center gap-4 text-amber-400 '>
-        <span className='text-lg'>Current chars:</span>
-        <pre className='text-2xl'>{`[${chars}]`}</pre>
-      </div>
+      <CurrentChars chars={chars} />
       <input
         type='submit'
         value={`Add ${inputMode === 'chars' ? 'character' : 'collection'}:`}
