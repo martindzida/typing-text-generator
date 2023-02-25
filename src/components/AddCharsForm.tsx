@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { LanguageIcon } from '@heroicons/react/24/outline'
+import SwitchModeSpan from './SwitchModeSpan'
+import FormHeader from './FormHeader'
 
 interface FormValues {
   newChar: string
 }
 
-type TInputMode = 'chars' | 'collection'
+export type TInputMode = 'chars' | 'collection'
 
 const AddCharsForm = () => {
   const [chars, setChars] = useState<string[]>([])
@@ -31,10 +33,9 @@ const AddCharsForm = () => {
       onSubmit={handleSubmit(submitHanlder)}
       className='flex flex-col gap-8'
     >
-      <div className='flex justify-center items-center gap-4 pb-8'>
-        <h3 className='text-amber-400 text-4xl'>Characters</h3>
+      <FormHeader title='Characters'>
         <LanguageIcon className='w-8 h-8 text-slate-400' />
-      </div>
+      </FormHeader>
       <div className='flex items-center gap-4'>
         <label htmlFor='textLength' className='text-amber-400 text-lg'>
           {inputMode === 'chars' ? 'Add character' : 'Add whole word'}
@@ -46,26 +47,18 @@ const AddCharsForm = () => {
           className='rounded p-1 focus:outline-none w-8'
         />
         <div>
-          <span
-            onClick={() => setInputMode('chars')}
-            className={`${
-              inputMode === 'chars'
-                ? 'bg-amber-400 text-slate-900'
-                : 'bg-slate-700 text-slate-100'
-            } font-medium rounded-l-lg px-3 py-2 hover:cursor-pointer`}
+          <SwitchModeSpan
+            inputModeState={[inputMode, setInputMode]}
+            mode='chars'
           >
             Character
-          </span>
-          <span
-            onClick={() => setInputMode('collection')}
-            className={`${
-              inputMode === 'collection'
-                ? 'bg-amber-400 text-slate-900'
-                : 'bg-slate-700 text-slate-100'
-            } font-medium rounded-r-lg px-3 py-2 hover:cursor-pointer`}
+          </SwitchModeSpan>
+          <SwitchModeSpan
+            inputModeState={[inputMode, setInputMode]}
+            mode='collection'
           >
             Collection
-          </span>
+          </SwitchModeSpan>
         </div>
       </div>
       <div className='flex items-center gap-4 text-amber-400 '>

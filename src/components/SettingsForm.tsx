@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import genText from '../utils/genText'
 import { Dispatch, SetStateAction } from 'react'
 import { Cog6ToothIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
+import FormHeader from './FormHeader'
 
 interface FormValues {
   textLength: number
@@ -44,10 +45,9 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
       onSubmit={handleSubmit(submitHanlder)}
       className='flex flex-col gap-8'
     >
-      <div className='flex justify-center items-center gap-4 pb-8'>
-        <h3 className='text-amber-400 text-4xl'>Options</h3>
+      <FormHeader title='Options'>
         <Cog6ToothIcon className='w-8 h-8 text-slate-400' />
-      </div>
+      </FormHeader>
       <div className='flex items-center gap-8'>
         <label htmlFor='textLength' className='text-amber-400 text-lg'>
           Text length (words):
