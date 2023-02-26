@@ -1,18 +1,22 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { LanguageIcon } from '@heroicons/react/24/outline'
+import { LanguageIcon, PlusIcon } from '@heroicons/react/24/outline'
 import SwitchModeSpan from './SwitchModeSpan'
 import FormHeader from './FormHeader'
 import CurrentChars from './CurrentChars'
+import FormSubmitBtn from './FormSubmitBtn'
 
+interface Props {
+  SChars: [string[], React.Dispatch<React.SetStateAction<string[]>>]
+}
 interface FormValues {
   newChar: string
 }
 
 export type TInputMode = 'chars' | 'collection'
 
-const AddCharsForm = () => {
-  const [chars, setChars] = useState<string[]>([])
+const AddCharsForm = ({ SChars }: Props) => {
+  const [chars, setChars] = SChars
 
   //modes: add chars in a single string / add chars separetely
   const [inputMode, setInputMode] = useState<TInputMode>('chars')
@@ -63,11 +67,10 @@ const AddCharsForm = () => {
         </div>
       </div>
       <CurrentChars chars={chars} />
-      <input
-        type='submit'
-        value={`Add ${inputMode === 'chars' ? 'character' : 'collection'}:`}
-        className='bg-amber-400 text-slate-900 font-medium text-lg rounded p-3 mt-4 hover:cursor-pointer'
-      />
+      <FormSubmitBtn>
+        {`Add ${inputMode === 'chars' ? 'character' : 'collection'}`}
+        <PlusIcon className='w-6 h-6' />
+      </FormSubmitBtn>
     </form>
   )
 }
