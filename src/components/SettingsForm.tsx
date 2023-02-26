@@ -3,18 +3,19 @@ import genText from '../utils/genText'
 import { Dispatch, SetStateAction } from 'react'
 import { Cog6ToothIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
 import FormHeader from './FormHeader'
+import FormSubmitBtn from './FormSubmitBtn'
 
+interface Props {
+  chars: string[]
+  getGeneratedText: Dispatch<SetStateAction<string | null>>
+}
 interface FormValues {
   textLength: number
   minWordLength: number
   maxWordLength: number
 }
 
-interface Props {
-  getGeneratedText: Dispatch<SetStateAction<string | null>>
-}
-
-const SettingsFrom = ({ getGeneratedText }: Props) => {
+const SettingsForm = ({ chars, getGeneratedText }: Props) => {
   const {
     register,
     handleSubmit,
@@ -33,7 +34,7 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
     maxWordLength,
   }: FormValues) => {
     const text = genText(
-      ['a', 'b', 'c'],
+      chars,
       Number(textLength),
       Number(minWordLength),
       Number(maxWordLength)
@@ -78,14 +79,11 @@ const SettingsFrom = ({ getGeneratedText }: Props) => {
         />
       </div>
 
-      <button
-        type='submit'
-        className='flex justify-center gap-4 items-center bg-amber-400 text-slate-900 font-medium text-lg rounded p-3 mt-4'
-      >
+      <FormSubmitBtn>
         Generate <DocumentTextIcon className='w-6 h-6' />
-      </button>
+      </FormSubmitBtn>
     </form>
   )
 }
 
-export default SettingsFrom
+export default SettingsForm
