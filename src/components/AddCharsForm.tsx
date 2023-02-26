@@ -10,7 +10,7 @@ interface Props {
   SChars: [string[], React.Dispatch<React.SetStateAction<string[]>>]
 }
 interface FormValues {
-  newChar: string
+  input: string
 }
 
 export type TInputMode = 'chars' | 'collection'
@@ -27,9 +27,15 @@ const AddCharsForm = ({ SChars }: Props) => {
     formState: { errors },
   } = useForm<FormValues>()
 
-  const submitHanlder = ({ newChar }: FormValues) => {
-    if (!chars.includes(newChar)) {
-      setChars(prev => [...prev, newChar])
+  const submitHanlder = ({ input }: FormValues) => {
+    if (inputMode === 'chars') {
+      if (!chars.includes(input)) {
+        setChars(prev => [...prev, input])
+      }
+    } else {
+      const newChars = [...Array(input.length)].map((ch, i) => input[i])
+      const uniq = Array.from(new Set([...chars, ...newChars]))
+      setChars(uniq)
     }
   }
 
@@ -43,13 +49,15 @@ const AddCharsForm = ({ SChars }: Props) => {
       </FormHeader>
       <div className='flex items-center gap-4'>
         <label htmlFor='textLength' className='text-amber-400 text-lg'>
-          {inputMode === 'chars' ? 'Add character' : 'Add whole word'}
+          {inputMode === 'chars' ? 'Add character' : 'Add collection'}
         </label>
         <input
           type='text'
-          maxLength={1}
-          {...register('newChar')}
-          className='rounded p-1 focus:outline-none w-8'
+          maxLength={inputMode === 'chars' ? 1 : 42}
+          {...register('input')}
+          className={`rounded p-1 focus:outline-none ${
+            inputMode === 'chars' ? 'w-8' : 'w-32'
+          }`}
         />
         <div>
           <SwitchModeSpan
